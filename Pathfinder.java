@@ -100,4 +100,10 @@ public class Pathfinder {
     public boolean validatePath(Vec2 origin, Vec2 dest) {
         return getValidTiles(origin).contains(dest);
     }
+
+    public void printPaths() {
+        for (Vec2 pos : navigablePositions) {
+            System.out.println("(" + pos.getX() + ", " + pos.getY() + ")");
+        }
+    }
 }
