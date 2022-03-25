@@ -24,7 +24,15 @@ class Manager
 
     //The entrypoint of the program.
     public static void main(String[] args) {
-        
+        Manager mgr = new Manager();
+        mgr.play();
+    }
+
+    public void play() {
+        //Create a new game.
+        currentGame = new Game();
+        //Play the game.
+        currentGame.startGame(1, 0);
     }
 
     //Loads the game from the disk into the attribute currentGame.

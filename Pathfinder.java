@@ -89,15 +89,15 @@ public class Pathfinder {
 
     //Returns all navigable tiles from the origin.
     public ArrayList<Vec2> getValidTiles(Vec2 origin) {
+        visitedPositions = new ArrayList<Vec2>();
+        navigablePositions = new ArrayList<Vec2>();
+
         checkTile(origin);
         return navigablePositions;
     }
 
     //Returns whether navigation between the origin and destination is possible
     public boolean validatePath(Vec2 origin, Vec2 dest) {
-        checkTile(origin);
-
-        //Should function because Vec2 overrides the toEquals(o) method.
-        return navigablePositions.contains(dest);
+        return getValidTiles(origin).contains(dest);
     }
 }
