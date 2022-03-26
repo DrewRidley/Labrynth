@@ -47,4 +47,8 @@ public final class Vec2 implements Serializable
     public static Vec2 nullVec() {
         return new Vec2(-1, -1);
     }
+
+    public double dist(Vec2 other) {
+        return Math.sqrt(Math.pow(this.x - other.getX(), 2) + Math.pow(this.y - other.getY(), 2));
+    }
 }

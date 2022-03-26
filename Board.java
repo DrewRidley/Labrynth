@@ -3,14 +3,19 @@ import java.util.ArrayList;
 public class Board implements java.io.Serializable {
     private Tile[][] map;
 
+    //The piece currently outside of the board
+    private Tile activePiece;
+
     public Board(Tile[][] tileMap) {
         this.map = tileMap;
+        this.activePiece = new Tile(true, true, false, false);
     }
 
     public Tile getTile(Vec2 pos) {
         return map[pos.getX()][pos.getY()];
     }
-
+    
+    //Should rarely be used 
     public void setTile(Vec2 pos, Tile t) {
         map[pos.getX()][pos.getY()] = t;
     }
@@ -18,6 +23,43 @@ public class Board implements java.io.Serializable {
     public int getLen() {
         return this.map.length;
     }
+
+    //Insert the tile into 'row' from the top.
+    public void insertRowTop(int row) {
+        Tile newActiveTile = map[row][this.map.length - 1];
+
+        for (int i = 0; i < this.map.length; i++) {
+            map[row][i] = map[row][i - 1 ];
+        }
+
+        for (int i = this.map.length - 1; i >= 0; i++) {
+            this.map[row][i] = this.map[row][i - 1];
+        }
+
+        activePiece = newActiveTile;
+    }
+
+    public void insertRowBottom(int row) {
+        Tile newActiveTile = map[row][0];
+        
+        for (int i = 0; i < this.map.length - 1; i++) {
+            this.map[row][i] = this.map[row][i + 1];
+        }
+
+        //Tile newActiveTile = map[row][this.map.length - 1];
+        this.map[row][this.map.length - 1] = activePiece;
+        activePiece = newActiveTile;
+    }
+
+    public void insertColLeft(int col) {
+
+    }
+
+    public void insertColRight(int col) {
+
+    }
+
+    //Utility and debug methods below -----------------------------------
 
     public static Board random(int size) {
         Tile[][] board = new Tile[size][size];
@@ -52,6 +94,8 @@ public class Board implements java.io.Serializable {
         return new Board(board);
     }
 
+
+    //Generates a static board of rows (for testing)
     public static Board rows(int size) {
         Tile[][] board = new Tile[size][size]; 
         for(int row = 0; row < board.length; row++) {
@@ -63,6 +107,7 @@ public class Board implements java.io.Serializable {
         return new Board(board);
     }
 
+    //Generates a static board of columns (for testing)
     public static Board cols(int size) {
         Tile[][] board = new Tile[size][size]; 
         for(int row = 0; row < board.length; row++) {
@@ -81,8 +126,8 @@ public class Board implements java.io.Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for (int y = 0; y < map.length - 1; y++) {
-            for (int x = 0; x < map[y].length - 1; x++) {
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
                 sb.append(map[x][y].toString());
             }
             sb.append("\n");
@@ -93,8 +138,8 @@ public class Board implements java.io.Serializable {
 
     //Prints the board, hightlighting the specified tiles with green.
     public void printHighlight(ArrayList<Vec2> highlights) {
-        for (int y = 0; y < map.length - 1; y++) {
-            for (int x = 0; x < map[y].length - 1; x++) {
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
                 if(highlights.contains(new Vec2(x, y))) {
                     System.out.print("\u001B[32m" + map[x][y].toString() + "\u001B[0m");
                 }
@@ -105,4 +150,5 @@ public class Board implements java.io.Serializable {
             System.out.println();
         }
     }
+
 }
