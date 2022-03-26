@@ -24,7 +24,7 @@ public class Pathfinder {
 
         //The current tile permits movement to a left tile and such tile exists,
         if(pos.getX() > 0 && tile.leftOpen()) {
-            Vec2 targetPos = new Vec2(pos.getX() - 1, pos.getY());
+            Vec2 targetPos = new Vec2(pos.getX(), pos.getY());
             Tile target = gameBoard.getTile(targetPos);
 
             if(target.rightOpen()) {
@@ -40,7 +40,7 @@ public class Pathfinder {
 
         //A tile above this tile exists and our tile permits movement to it.
         if(pos.getY() > 0 && tile.topOpen()) {
-            Vec2 targetPos = new Vec2(pos.getX(), pos.getY() - 1);
+            Vec2 targetPos = new Vec2(pos.getX(), pos.getY());
             Tile target = gameBoard.getTile(targetPos);
 
             if(target.bottomOpen()) {
@@ -54,7 +54,7 @@ public class Pathfinder {
         }
 
         //A tile to the right of this tile exists and our tile permits movement to this tile.
-        if(pos.getX() < gameBoard.getLen() - 1 && tile.rightOpen()) {
+        if(pos.getX() < gameBoard.getLen() && tile.rightOpen()) {
             Vec2 targetPos = new Vec2(pos.getX() + 1, pos.getY());
             Tile target = gameBoard.getTile(targetPos);
 
@@ -69,7 +69,7 @@ public class Pathfinder {
         }
 
         //A tile below us exists and we can move to it,
-        if(pos.getY() < gameBoard.getLen() - 1 && tile.bottomOpen()) {
+        if(pos.getY() < gameBoard.getLen() && tile.bottomOpen()) {
             Vec2 targetPos = new Vec2(pos.getX(), pos.getY() + 1);
             Tile target = gameBoard.getTile(targetPos);
 
@@ -105,6 +105,23 @@ public class Pathfinder {
 
     //Returns the closest navigable tile to the destination. Will return the destination if there is a path.
     public Vec2 minimizeDist(Vec2 origin, Vec2 dest) {
-        return Vec2.nullVec();
+        ArrayList<Vec2> validTiles = getValidTiles(origin);
+
+        if (validTiles.contains(origin)) {
+            return origin;
+        }
+
+        Vec2 closest = null;
+        double minDist = Double.MAX_VALUE;
+
+        for(Vec2 tile : validTiles) {
+            double dist = tile.dist(dest);
+            if(dist < minDist) {
+                minDist = dist;
+                closest = tile;
+            }
+        }
+
+        return closest;
     }
 }
