@@ -27,11 +27,24 @@ public final class Vec2 implements Serializable
         this.y = y;
     }
 
-
     //Overriding this will ensure use of ArrayList.contains(e) in Pathfinder correctly compares values.
     @Override
     public boolean equals(Object o) {
         Vec2 other = (Vec2) o;
         return other.getX() == this.getX() && other.getY() == this.getY();
+    }
+
+    @Override
+    public String toString() {
+        return "(" + this.x + ", " + this.y + ")";
+    }
+
+    //Used for indicating when a tile is not currently on the board (the tile is currently being manipulated).
+    public boolean isNull() {
+        return this.x == -1 || this.y == -1;
+    }
+
+    public static Vec2 nullVec() {
+        return new Vec2(-1, -1);
     }
 }

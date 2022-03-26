@@ -8,11 +8,11 @@ import java.util.ArrayList;
 /// Date Modified: 3/25/22.
 /// Methods: getValidTiles(Vec2): ArrayList<Vec2>, validatePath(Vec2, Vec2): boolean
 public class Pathfinder {
-    public Pathfinder(Tile[][] tileMap) {
-        gameBoard = tileMap;
+    public Pathfinder(Board brd) {
+        gameBoard = brd;
     }
 
-    private Tile[][] gameBoard;
+    private Board gameBoard;
     private ArrayList<Vec2> visitedPositions;
     private ArrayList<Vec2> navigablePositions;
 
@@ -20,65 +20,67 @@ public class Pathfinder {
     private void checkTile(Vec2 pos) {
         visitedPositions.add(pos);
         //Will visit the tile, investigate possible paths to neighbors, and invoke again from those neighbors.
-        Tile tile = gameBoard[pos.getX()][pos.getY()];
+        Tile tile = gameBoard.getTile(pos);
 
         //The current tile permits movement to a left tile and such tile exists,
         if(pos.getX() > 0 && tile.leftOpen()) {
-            Tile target = gameBoard[pos.getX() - 1][pos.getY()];
             Vec2 targetPos = new Vec2(pos.getX() - 1, pos.getY());
+            Tile target = gameBoard.getTile(targetPos);
 
             if(target.rightOpen()) {
-                //Both this tile and the target tile permit the move, so it exists.
-                navigablePositions.add(targetPos);
-
                 //Only visit a tile if it has not been visited before to prevent infinite recursion.
-                if(!visitedPositions.contains(pos))
+                if(!visitedPositions.contains(targetPos))
+                {
+                    navigablePositions.add(targetPos);
                     checkTile(targetPos);
+                }
+                    
             }
         }
 
         //A tile above this tile exists and our tile permits movement to it.
-        if(pos.getY() < gameBoard[0].length - 1 && tile.topOpen()) {
-            Tile target = gameBoard[pos.getX()][pos.getY() + 1];
+        if(pos.getY() < gameBoard.getLen() - 1 && tile.topOpen()) {
             Vec2 targetPos = new Vec2(pos.getX(), pos.getY() + 1);
+            Tile target = gameBoard.getTile(targetPos);
 
             if(target.bottomOpen()) {
-                //Both this tile and the target tile permit the move, so it exists.
-                navigablePositions.add(targetPos);
-
-                //Start navigating from this tile.
-                if(!visitedPositions.contains(pos))
+                //Only visit a tile if it has not been visited before to prevent infinite recursion.
+                if(!visitedPositions.contains(targetPos))
+                {
+                    navigablePositions.add(targetPos);
                     checkTile(targetPos);
+                }
             }
         }
 
         //A tile to the right of this tile exists and our tile permits movement to this tile.
-        if(pos.getX() < gameBoard.length - 1 && tile.rightOpen()) {
-            Tile target = gameBoard[pos.getX() + 1][pos.getY()];
+        if(pos.getX() < gameBoard.getLen() - 1 && tile.rightOpen()) {
             Vec2 targetPos = new Vec2(pos.getX() + 1, pos.getY());
+            Tile target = gameBoard.getTile(targetPos);
 
             if(target.leftOpen()) {
-                //Both this tile and the target tile permit the move, so it exists.
-                navigablePositions.add(targetPos);
-
-                //Start navigating from this tile.
-                if(!visitedPositions.contains(pos))
+                //Only visit a tile if it has not been visited before to prevent infinite recursion.
+                if(!visitedPositions.contains(targetPos))
+                {
+                    navigablePositions.add(targetPos);
                     checkTile(targetPos);
+                }
             }
         }
 
         //A tile below us exists and we can move to it,
         if(pos.getY() > 0 && tile.bottomOpen()) {
-            Tile target = gameBoard[pos.getX()][pos.getY() - 1];
             Vec2 targetPos = new Vec2(pos.getX(), pos.getY() - 1);
+            Tile target = gameBoard.getTile(targetPos);
 
             //The target allows us to enter.
             if(target.topOpen()) {
-                navigablePositions.add(targetPos);
-
-                //Start navigating from this tile.
-                if(!visitedPositions.contains(pos))
+                //Only visit a tile if it has not been visited before to prevent infinite recursion.
+                if(!visitedPositions.contains(targetPos))
+                {
+                    navigablePositions.add(targetPos);
                     checkTile(targetPos);
+                }
             }
         }
 
@@ -101,9 +103,8 @@ public class Pathfinder {
         return getValidTiles(origin).contains(dest);
     }
 
-    public void printPaths() {
-        for (Vec2 pos : navigablePositions) {
-            System.out.println("(" + pos.getX() + ", " + pos.getY() + ")");
-        }
+    //Returns the closest navigable tile to the destination. Will return the destination if there is a path.
+    public Vec2 minimizeDist(Vec2 origin, Vec2 dest) {
+        return Vec2.nullVec();
     }
 }

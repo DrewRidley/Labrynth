@@ -1,4 +1,4 @@
-public class Tile 
+public class Tile implements java.io.Serializable
 {
     private boolean leftOpen;
     private boolean topOpen;
@@ -13,8 +13,6 @@ public class Tile
     }
 
     private Pawn[] players;
-
-    //State getters.
 
     public boolean leftOpen() {
         return leftOpen;
@@ -41,26 +39,13 @@ public class Tile
         topOpen = temp;
     }
 
+    //Rotates this tile left by 90 degrees.
     public void rotateLeft() {
         boolean temp = rightOpen;
         rightOpen = bottomOpen;
         bottomOpen = leftOpen;
         leftOpen = topOpen;
         topOpen = temp;
-    }
-
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_BLACK = "\u001B[30m";
-    public static final String ANSI_RED = "\u001B[31m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
-    public static final String ANSI_BLUE = "\u001B[34m";
-    public static final String ANSI_PURPLE = "\u001B[35m";
-    public static final String ANSI_CYAN = "\u001B[36m";
-    public static final String ANSI_WHITE = "\u001B[37m";
-
-    public String toGreenString() {
-        return ANSI_GREEN + this.toString() + ANSI_RESET;
     }
 
     @Override

@@ -29,9 +29,7 @@ class Manager
     }
 
     public void play() {
-        //Create a new game.
         currentGame = new Game();
-        //Play the game.
         currentGame.startGame(1, 0);
     }
 
@@ -42,6 +40,9 @@ class Manager
             ObjectInputStream objs = new ObjectInputStream(fs);
 
             currentGame = (Game) objs.readObject();
+
+            objs.close();
+            fs.close();
         }
         catch (FileNotFoundException fne) {
             System.out.println("Attempted to load from a file that does not exist!");
