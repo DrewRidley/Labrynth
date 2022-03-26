@@ -1,9 +1,7 @@
-abstract class Pawn 
+abstract class Pawn implements java.io.Serializable
 {
     private Vec2 position;
     private Color color;
-
-    //Getters:
 
     public Vec2 getPos() {
         return position;
@@ -13,8 +11,6 @@ abstract class Pawn
         return color;
     }
 
-    //Setters
-
     public void setPos(Vec2 pos) {
         position = pos;
     }
@@ -22,9 +18,14 @@ abstract class Pawn
     public void setColor(Color color) {
         this.color = color;
     }
-
-    //Methods
     
+    //An optional initialization method to ensure the pawn is configured before the game begins.
+    //Primarily implemented for the possible use of networking.
+    public void init() 
+    {
+        //Do nothing.
+    }
+
     //To be implemented by the AIPawn or PlayerPawn, will be executed to simulate a players entire turn.
     public abstract void move(Pathfinder pf, Tile[][] board);
 }
