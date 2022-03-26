@@ -13,13 +13,14 @@ class Game implements java.io.Serializable
 
     public void startGame(int players, int ai) {
         //Generate a fresh board.
-        this.board = Board.random(50);
+        this.board = Board.random(7);
         this.pf = new Pathfinder(board);
-        Vec2 startPos = new Vec2(1, 1);
+        Vec2 startPos = new Vec2(0, 0);
 
         //System.out.println(board);
 
         ArrayList<Vec2> highlights = pf.getValidTiles(startPos);
+
         highlights.add(startPos);
         this.board.printHighlight(highlights);
     }
