@@ -39,8 +39,8 @@ public class Pathfinder {
         }
 
         //A tile above this tile exists and our tile permits movement to it.
-        if(pos.getY() < gameBoard.getLen() - 1 && tile.topOpen()) {
-            Vec2 targetPos = new Vec2(pos.getX(), pos.getY() + 1);
+        if(pos.getY() > 0 && tile.topOpen()) {
+            Vec2 targetPos = new Vec2(pos.getX(), pos.getY() - 1);
             Tile target = gameBoard.getTile(targetPos);
 
             if(target.bottomOpen()) {
@@ -69,8 +69,8 @@ public class Pathfinder {
         }
 
         //A tile below us exists and we can move to it,
-        if(pos.getY() > 0 && tile.bottomOpen()) {
-            Vec2 targetPos = new Vec2(pos.getX(), pos.getY() - 1);
+        if(pos.getY() < gameBoard.getLen() - 1 && tile.bottomOpen()) {
+            Vec2 targetPos = new Vec2(pos.getX(), pos.getY() + 1);
             Tile target = gameBoard.getTile(targetPos);
 
             //The target allows us to enter.
