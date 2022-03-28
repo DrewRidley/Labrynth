@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+///------------------
+/// Class: Game
+/// Author: Drew Ridley
+/// Purpose: To represent a serializable game state.
+/// Date Modified: 3/25/22.
+/// Methods: main(string[] args), load
 class Game implements java.io.Serializable 
 {
     //The board itself.
@@ -15,7 +21,7 @@ class Game implements java.io.Serializable
         //Generate a fresh board.
         this.board = Board.random(20);
         this.pf = new Pathfinder(board);
-        Vec2 startPos = new Vec2(0, 0);
+        Vec2 startPos = new Vec2(10, 10);
 
         //System.out.println(board);
 

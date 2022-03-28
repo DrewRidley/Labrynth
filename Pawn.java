@@ -1,3 +1,9 @@
+///------------------
+/// Class: Pawn
+/// Author: Drew Ridley
+/// Purpose: To represent a pawn in the game world.
+/// Date Modified: 3/25/22.
+/// Methods: getPos(): Vec2, 
 abstract class Pawn implements java.io.Serializable
 {
     private Vec2 position;

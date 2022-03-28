@@ -1,5 +1,11 @@
 import java.util.ArrayList;
 
+///------------------
+/// Class: Board
+/// Author: Drew Ridley
+/// Purpose: To represent a boaed with methods to manipulate it according to the game's rules.
+/// Date Modified: 3/25/22.
+/// Methods: getTile(Vec2): Tile, getLen(): int, getWidth(): int, getHeight(): int, getTiles(): Tile[][]
 public class Board implements java.io.Serializable {
     private Tile[][] map;
 

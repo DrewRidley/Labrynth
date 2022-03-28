@@ -114,7 +114,7 @@ public class Pathfinder {
 
         for(Vec2 tile : validTiles) {
             double dist = tile.dist(dest);
-            if(dist < minDist) 
+            if(dist < minDist) {
                 minDist = dist;
                 closest = tile;
             }
