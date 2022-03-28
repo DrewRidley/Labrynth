@@ -1,5 +1,9 @@
-//Tile class represents a tile in the game and contains all state unique to that tile. 
-//The class implements the interface Serializable so that the JVM serializes it correctly to the disk.
+///------------------
+/// Class: Tile
+/// Author: Drew Ridley
+/// Purpose: To represent a tile on the game board.
+/// Date Modified: 3/25/22.
+/// Methods: leftOpen(): boolean, rightOpen(): boolean, topOpen(): boolean, bottomOpen(): boolean
 public class Tile implements java.io.Serializable
 {
     private boolean leftOpen;
@@ -56,39 +60,39 @@ public class Tile implements java.io.Serializable
     public String toString() {
         //T-Piece conditions.
         if (topOpen() && bottomOpen() && rightOpen()) {
-            return "╠";
+            return "╠ ";
         }
         if (topOpen() && bottomOpen() && leftOpen()) {
-            return "╣";
+            return "╣ ";
         }   
         if (topOpen() && rightOpen() && leftOpen()) {
-            return "╩";
+            return "╩ ";
         }
         if (bottomOpen() && rightOpen() && leftOpen()) {
-            return "╦";
+            return "╦ ";
         }
 
         //Straight-Piece conditions.
         if (topOpen() && bottomOpen()) {
-            return "║";
+            return "║ ";
         }
         if(leftOpen() && rightOpen()) {
-            return "═";
+            return "═ ";
         }
 
 
         //Corner-piece conditions.
         if (bottomOpen() && rightOpen()) {
-            return "╔";
+            return "╔ ";
         }
         if (bottomOpen() && leftOpen()) {
-            return "╗";
+            return "╗ ";
         }
         if (topOpen() && rightOpen()) {
-            return "╚";
+            return "╚ ";
         }
         if (topOpen() && leftOpen()) {
-            return "╝";
+            return "╝ ";
         }
 
         return "";
