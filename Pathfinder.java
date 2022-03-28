@@ -43,6 +43,7 @@ public class Pathfinder {
             Vec2 targetPos = new Vec2(pos.getX(), pos.getY() - 1);
             Tile target = gameBoard.getTile(targetPos);
 
+            //Ensure the target tile permits movement to its bottom.
             if(target.bottomOpen()) {
                 //Only visit a tile if it has not been visited before to prevent infinite recursion.
                 if(!visitedPositions.contains(targetPos))
@@ -58,6 +59,7 @@ public class Pathfinder {
             Vec2 targetPos = new Vec2(pos.getX() + 1, pos.getY());
             Tile target = gameBoard.getTile(targetPos);
 
+            //Ensure the target tile permits movement to its left
             if(target.leftOpen()) {
                 //Only visit a tile if it has not been visited before to prevent infinite recursion.
                 if(!visitedPositions.contains(targetPos))
@@ -73,7 +75,7 @@ public class Pathfinder {
             Vec2 targetPos = new Vec2(pos.getX(), pos.getY() + 1);
             Tile target = gameBoard.getTile(targetPos);
 
-            //The target allows us to enter.
+            //Ensure the target tile permits movement to its top.
             if(target.topOpen()) {
                 //Only visit a tile if it has not been visited before to prevent infinite recursion.
                 if(!visitedPositions.contains(targetPos))
@@ -83,10 +85,6 @@ public class Pathfinder {
                 }
             }
         }
-
-        //If the code reaches this point; there are two possibilities.
-        //Either the recursion is complete (all tiles have been visited),
-        //Or the tile in question is not a member of the board (is currently being played).
     }
 
     //Returns all navigable tiles from the origin.
@@ -116,7 +114,7 @@ public class Pathfinder {
 
         for(Vec2 tile : validTiles) {
             double dist = tile.dist(dest);
-            if(dist < minDist) {
+            if(dist < minDist) 
                 minDist = dist;
                 closest = tile;
             }

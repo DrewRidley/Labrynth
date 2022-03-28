@@ -13,15 +13,17 @@ class Game implements java.io.Serializable
 
     public void startGame(int players, int ai) {
         //Generate a fresh board.
-        this.board = Board.random(7);
+        this.board = Board.random(20);
         this.pf = new Pathfinder(board);
         Vec2 startPos = new Vec2(0, 0);
 
         //System.out.println(board);
 
+        //Get an array of all navigable tiles from (0,0).
         ArrayList<Vec2> highlights = pf.getValidTiles(startPos);
 
         highlights.add(startPos);
+        //Print the entire board, highlighting the navigable tiles in green.
         this.board.printHighlight(highlights);
     }
 }

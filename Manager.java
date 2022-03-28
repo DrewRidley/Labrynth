@@ -28,6 +28,7 @@ class Manager
         mgr.play();
     }
 
+    
     public void play() {
         currentGame = new Game();
         currentGame.startGame(1, 0);

@@ -1,3 +1,5 @@
+//Tile class represents a tile in the game and contains all state unique to that tile. 
+//The class implements the interface Serializable so that the JVM serializes it correctly to the disk.
 public class Tile implements java.io.Serializable
 {
     private boolean leftOpen;
@@ -12,6 +14,7 @@ public class Tile implements java.io.Serializable
         this.bottomOpen = bottomOpen;
     }
 
+    //All of the players currently residing on this tile.
     private Pawn[] players;
 
     public boolean leftOpen() {
@@ -48,6 +51,7 @@ public class Tile implements java.io.Serializable
         topOpen = temp;
     }
 
+    //Prints the tile as a ASCII character that can cleanly be displayed to the console.
     @Override
     public String toString() {
         //T-Piece conditions.
