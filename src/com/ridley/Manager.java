@@ -1,4 +1,4 @@
-//File streams.
+package com.ridley;//File streams.
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
@@ -28,10 +28,8 @@ class Manager
         mgr.play();
     }
 
-    
     public void play() {
         currentGame = new Game();
-        currentGame.startGame(1, 0);
     }
 
     //Loads the game from the disk into the attribute currentGame.

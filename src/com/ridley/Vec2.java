@@ -1,3 +1,5 @@
+package com.ridley;
+
 import java.io.Serializable;
 
 public final class Vec2 implements Serializable
