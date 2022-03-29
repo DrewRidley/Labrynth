@@ -12,11 +12,6 @@ public class Board implements java.io.Serializable {
     //The piece currently outside of the board
     private Tile activePiece;
 
-    public Board(Tile[][] tileMap) {
-        this.map = tileMap;
-        this.activePiece = new Tile(true, true, false, false);
-    }
-
     public Tile getTile(Vec2 pos) {
         return map[pos.getX()][pos.getY()];
     }
@@ -67,7 +62,7 @@ public class Board implements java.io.Serializable {
 
     //Utility and debug methods below -----------------------------------
 
-    public static Board random(int size) {
+    public void random(int size) {
         Tile[][] board = new Tile[size][size];
         for(int row = 0; row < board.length; row++) {
             for(int col = 0; col < board[row].length; col++) {
@@ -97,7 +92,7 @@ public class Board implements java.io.Serializable {
             }
         }
 
-        return new Board(board);
+        this.map = board;
     }
 
 

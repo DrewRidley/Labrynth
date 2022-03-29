@@ -19,7 +19,9 @@ class Game implements java.io.Serializable
 
     public void startGame(int players, int ai) {
         //Generate a fresh board.
-        this.board = Board.random(20);
+        this.board = new Board();
+        this.board.random(7);
+        
         this.pf = new Pathfinder(board);
         Vec2 startPos = new Vec2(10, 10);
 
