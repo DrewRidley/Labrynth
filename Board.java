@@ -97,7 +97,7 @@ public class Board implements java.io.Serializable {
 
 
     //Generates a static board of rows (for testing)
-    public static Board rows(int size) {
+    public void rows(int size) {
         Tile[][] board = new Tile[size][size]; 
         for(int row = 0; row < board.length; row++) {
             for(int col = 0; col < board[row].length; col++) {
@@ -105,11 +105,11 @@ public class Board implements java.io.Serializable {
             }
         }
 
-        return new Board(board);
+        this.map = board;
     }
 
     //Generates a static board of columns (for testing)
-    public static Board cols(int size) {
+    public void cols(int size) {
         Tile[][] board = new Tile[size][size]; 
         for(int row = 0; row < board.length; row++) {
             for(int col = 0; col < board[row].length; col++) {
@@ -117,7 +117,30 @@ public class Board implements java.io.Serializable {
             }
         }
 
-        return new Board(board);
+        this.map = board;
+    }
+
+    public void path(int size) {
+        Tile[][] board = new Tile[size][size]; 
+        
+        //This code will generate one contiguous path for the entire board.
+        for(int row = 0; row < board.length; row++) {
+            for(int col = 0; col < board[row].length; col++) {
+                if(col == board.length - 1) {
+                    if (row % 2 == 0) {
+                        board[row][col] = new Tile(true, false, false, true);
+                    }
+                    else {
+                        board[row][col] = new Tile(true, true, false, false);
+                    }
+                }
+                else {
+                    board[row][col] = new Tile(true, false, true, false);
+                }
+            }
+        }
+
+        this.map = board;
     }
 
     private static int getRandom(int min, int max) {
